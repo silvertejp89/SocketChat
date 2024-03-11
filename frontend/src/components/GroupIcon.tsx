@@ -1,4 +1,3 @@
-import React from "react";
 import { IGroup } from "./GroupList";
 import { Link } from "react-router-dom";
 

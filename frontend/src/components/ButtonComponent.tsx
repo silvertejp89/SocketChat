@@ -7,10 +7,10 @@ interface IButtonProps {
 
 const ButtonComponent = ({ buttonLink, buttonText }: IButtonProps) => {
   return (
-    <button>
+    <button className="">
       <Link
         to={buttonLink}
-        className=" bg-white border border-black rounded-md p-2"
+        className="bg-white border border-black rounded-md p-2"
       >
         {buttonText}
       </Link>
