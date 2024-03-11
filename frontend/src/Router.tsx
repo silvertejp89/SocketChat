@@ -15,7 +15,7 @@ export const router = createBrowserRouter([
         index: true,
       },
       {
-        path: "/animals",
+        path: "/Global",
         element: <Global />,
       },
       {
