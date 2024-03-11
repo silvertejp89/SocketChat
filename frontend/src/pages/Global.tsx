@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { GroupList } from "../components/GroupList";
 
 export const Global = () => {
   return (
@@ -14,11 +15,7 @@ export const Global = () => {
           </form>
 
           {/* Existing Groups */}
-          <div>
-            <button>
-              <Link to="/group">Simon's Room</Link>
-            </button>
-          </div>
+          <GroupList />
         </div>
         {/* Global Chat */}
         <div>

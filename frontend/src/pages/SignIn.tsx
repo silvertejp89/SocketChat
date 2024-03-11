@@ -1,4 +1,5 @@
 import ButtonComponent from "../components/ButtonComponent";
+import { UserList } from "../components/UserList";
 
 export const SignIn = () => {
   return (
@@ -14,10 +15,7 @@ export const SignIn = () => {
         <ButtonComponent buttonLink="global" buttonText="Join" />
       </div>
 
-      <div className="flex flex-row gap-5 mt-5">
-        <div>Simon</div>
-        <div>Simon2</div>
-      </div>
+      <UserList />
     </section>
   );
 };
