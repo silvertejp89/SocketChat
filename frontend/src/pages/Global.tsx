@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { GroupList } from "../components/GroupList";
 
 export const Global = () => {
