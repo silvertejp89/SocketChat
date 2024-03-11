@@ -1,9 +1,9 @@
 export const UserIcon = () => {
   return (
     <section className="flex gap-3">
-      <div>Simon</div>
-      <div>Kriss</div>
-      <div>Filip</div>
+      <li className="bg-white rounded p-1 cursor-pointer">Simon</li>
+      <li className="bg-white rounded p-1 cursor-pointer">Kriss</li>
+      <li className="bg-white rounded p-1 cursor-pointer">Filip</li>
     </section>
   );
 };
