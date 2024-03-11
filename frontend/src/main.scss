@@ -3,5 +3,16 @@
 @tailwind utilities;
 
 body {
-  background-color: rgb(238, 238, 238);
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  #root {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(241 245 249);
+    display: flex;
+    justify-content: center;
+    width: 70vw;
+  }
 }

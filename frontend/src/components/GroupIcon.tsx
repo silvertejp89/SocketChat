@@ -9,7 +9,7 @@ export const GroupIcon = ({ group }: IGroupProps) => {
   return (
     <Link
       to={"/" + group.name}
-      className="bg-green-200 rounded p-2 text-center"
+      className="bg-green-200 rounded border border-green-400 px-4 py-6 text-center h-20 items-center"
     >
       {group.name}
     </Link>

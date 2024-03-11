@@ -19,7 +19,7 @@ export const router = createBrowserRouter([
         element: <Global />,
       },
       {
-        path: "/Group/:GroupId",
+        path: "/Group",
         element: <Group />,
       },
     ],

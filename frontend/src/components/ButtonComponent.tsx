@@ -10,7 +10,7 @@ const ButtonComponent = ({ buttonLink, buttonText }: IButtonProps) => {
     <button className="">
       <Link
         to={buttonLink}
-        className="bg-white border border-black rounded-md p-2"
+        className="bg-white rounded-md py-2 px-4 border border-slate-300"
       >
         {buttonText}
       </Link>

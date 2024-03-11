@@ -26,7 +26,7 @@ let groups: IGroup[] = [
 
 export const GroupList = () => {
   return (
-    <div className="grid grid-cols-2 gap-3 my-5">
+    <div className="grid grid-cols-2 gap-3 my-5 bg-white p-5 rounded overflow-auto">
       {groups.map((group) => (
         <GroupIcon group={group} />
       ))}
