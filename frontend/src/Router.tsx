@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { Global } from "./pages/Global";
 import { Group } from "./pages/Group";
 import { PageNotFound } from "./pages/PageNotFound";
-import { SignIn } from "./pages/SignIn";
+import { LandingPage } from "./pages/LandingPage";
 
 export const router = createBrowserRouter([
   {
@@ -11,7 +11,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <SignIn />,
+        element: <LandingPage />,
         index: true,
       },
       {

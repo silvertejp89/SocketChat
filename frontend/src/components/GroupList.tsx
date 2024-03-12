@@ -19,7 +19,7 @@ let groups: IGroup[] = [
     name: "hejhejdå",
   },
   {
-    id: 3,
+    id: 4,
     name: "hejhejdådå",
   },
 ];
@@ -28,7 +28,7 @@ export const GroupList = () => {
   return (
     <div className="grid grid-cols-2 gap-3 my-5 bg-white p-5 rounded overflow-auto">
       {groups.map((group) => (
-        <GroupIcon group={group} />
+        <GroupIcon group={group} key={group.id} />
       ))}
     </div>
   );
