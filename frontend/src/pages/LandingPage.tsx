@@ -4,9 +4,26 @@ import { Socket, io } from "socket.io-client";
 import { User } from "../models/User";
 
 export const LandingPage = () => {
+  const [users, setUsers] = useState<string[]>([]);
+  const [socket, setSocket] = useState<Socket>();
+
+  useEffect(() => {
+    const s = io("http://localhost:3000");
+    s.on("users_updated", (users: string[]) => {
+      console.log(users);
+      setUsers(users);
+    });
+
+    setSocket(s);
+
+    return () => {
+      socket?.disconnect();
+    };
+  }, []);
+
   return (
     <section>
-      <SignInComponent />
+      <SignInComponent socket={socket} users={users} key={users} />
     </section>
   );
 };

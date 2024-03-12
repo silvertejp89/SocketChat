@@ -1,9 +1,16 @@
-import { UserIcon } from "./UserIcon";
+import { User } from "../models/User";
 
-export const UserList = () => {
+interface IUserListProps {
+  user: string;
+}
+
+export const UserList = ({ user }: IUserListProps) => {
   return (
-    <ul className="flex flex-row gap-5 mt-5 bg-white  p-5 rounded">
-      <UserIcon />
-    </ul>
+    <li
+      key={user}
+      className="bg-blue-200 rounded p-1 cursor-pointer flex items-center justify-center h-10 w-14"
+    >
+      {user}
+    </li>
   );
 };
