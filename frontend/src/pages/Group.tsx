@@ -3,15 +3,16 @@ import { ChatComponent } from "../components/ChatComponent";
 
 export const Group = () => {
   return (
-    <>
-      <div className="flex justify-between">
-        <button>
+    <section className="h-screen w-full py-10 px-16">
+      <div className="flex justify-between mb-5">
+        <button className="bg-white w-1/4 h-10 rounded border border-slate-300">
           <Link to="/global">Go back</Link>
         </button>
-        <div>[Group.name]'s Room</div>
+        <div className="w-2/4 text-xl">[Group.name]'s Room</div>
       </div>
-
-      <ChatComponent />
-    </>
+      <div className="w-full h-[95%]  ">
+        <ChatComponent />
+      </div>
+    </section>
   );
 };

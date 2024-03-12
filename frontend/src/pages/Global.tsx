@@ -24,8 +24,9 @@ export const Global = () => {
 
           <GroupList />
         </div>
-
-        <ChatComponent />
+        <div className="w-1/2 min-h-[95%]">
+          <ChatComponent />
+        </div>
       </div>
     </section>
   );

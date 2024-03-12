@@ -23,8 +23,8 @@ export const ChatComponent = () => {
     },
   ];
   return (
-    <div className="w-1/2  flex-col">
-      <div className="bg-white w-full  min-h-[90%] mb-6 rounded flex flex-col gap-3 p-4 border border-slate-300">
+    <div className="flex-col h-full">
+      <div className="bg-white w-full  h-[90%] mb-6 rounded flex flex-col gap-3 p-4 border border-slate-300">
         {messageList.map((message) => (
           <MessageComponent message={message} key={message.id} />
         ))}
