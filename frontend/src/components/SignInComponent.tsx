@@ -1,7 +1,9 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { UserList } from "./UserList";
 import { Socket } from "socket.io-client";
 import { User } from "../models/User";
+import { SelectedUserContext } from "../contexts/SelectedUserContext";
+import { useNavigate } from "react-router-dom";
 
 interface ISignInProps {
   socket: Socket | undefined;
@@ -9,6 +11,8 @@ interface ISignInProps {
 }
 
 export const SignInComponent = ({ socket, users }: ISignInProps) => {
+  const navigate = useNavigate();
+  const setSelectedUser = useContext(SelectedUserContext);
   const [user, setUser] = useState<User>({
     id: 0,
     name: "",
@@ -17,15 +21,15 @@ export const SignInComponent = ({ socket, users }: ISignInProps) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
     console.log(e.target.value);
+    setSelectedUser?.setName(user.name);
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-
     socket?.emit("add_user", user.name);
+    navigate("/Global");
   };
-  console.log(user.name);
-
+  setSelectedUser?.setName(user.name);
   return (
     <section className="flex h-screen justify-center flex-col items-center ">
       <div className="text-2xl">Hello, what is your name?</div>

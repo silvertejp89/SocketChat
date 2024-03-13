@@ -1,12 +1,16 @@
+import { useContext } from "react";
 import ButtonComponent from "../components/ButtonComponent";
 import { ChatComponent } from "../components/ChatComponent";
 import { GroupList } from "../components/GroupList";
+import { SelectedUserContext } from "../contexts/SelectedUserContext";
 
 export const Global = () => {
+  const selectedUser = useContext(SelectedUserContext);
+
   return (
     <section className="flex flex-col items-around w-full h-screen py-10 px-16">
       <div className="flex flex-row  w-full justify-between pb-10">
-        <div className=" text-2xl  ">Welcome, [name].</div>
+        <div className=" text-2xl  ">Welcome, {selectedUser?.name}.</div>
         <ButtonComponent buttonLink="/" buttonText="Log out" />
       </div>
       <div className="flex gap-10 h-full">
