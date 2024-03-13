@@ -10,10 +10,6 @@ export const LandingPage = () => {
   useEffect(() => {
     const s = io("http://localhost:3000");
 
-    // s.on("show_users", (users: string[]) => {
-    //   setUsers(users);
-    // });
-
     s.on("users_updated", (users: string[]) => {
       console.log(users);
       setUsers(users);
