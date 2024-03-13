@@ -1,37 +1,34 @@
-import { useContext } from "react";
-import ButtonComponent from "../components/ButtonComponent";
+import { useEffect, useState } from "react";
 import { ChatComponent } from "../components/ChatComponent";
-import { GroupList } from "../components/GroupList";
+import { Socket, io } from "socket.io-client";
+import { GroupComponent } from "../components/GroupComponent";
 import { SelectedUserContext } from "../contexts/SelectedUserContext";
 
 export const Global = () => {
-  const selectedUser = useContext(SelectedUserContext);
+  const [groups, setGroups] = useState<string[]>([]);
+  const [socket, setSocket] = useState<Socket>();
+
+  useEffect(() => {
+    const s = io("http://localhost:3000");
+
+    s.on("groups_updated", (groups: string[]) => {
+      console.log(groups);
+      setGroups(groups);
+    });
+
+    setSocket(s);
+
+    return () => {
+      socket?.disconnect();
+    };
+  }, []);
 
   return (
-    <section className="flex flex-col items-around w-full h-screen py-10 px-16">
-      <div className="flex flex-row  w-full justify-between pb-10">
-        <div className=" text-2xl  ">Welcome, {selectedUser?.name}.</div>
-        <ButtonComponent buttonLink="/" buttonText="Log out" />
+    <div className="flex flex-row items-around w-full h-screen py-10 px-16 justify-between">
+      <GroupComponent socket={socket} groups={groups} />
+      <div className="w-1/2 min-h-[95%]">
+        <ChatComponent />
       </div>
-      <div className="flex gap-10 h-full">
-        <div className="w-1/2">
-          <form action="" className=" flex w-full h-8 justify-around gap-3">
-            <input
-              type="text"
-              placeholder="Room name..."
-              className="w-1/2 bg-white  rounded-md h-10 py-1 px-4 border border-slate-300"
-            />
-            <button className="bg-white w-1/2 h-10 rounded border border-slate-300">
-              <a href="/group">Create Room</a>
-            </button>
-          </form>
-
-          <GroupList />
-        </div>
-        <div className="w-1/2 min-h-[95%]">
-          <ChatComponent />
-        </div>
-      </div>
-    </section>
+    </div>
   );
 };
