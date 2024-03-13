@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { ChatComponent } from "../components/ChatComponent";
 import { Socket, io } from "socket.io-client";
 import { GroupComponent } from "../components/GroupComponent";
-import { SelectedUserContext } from "../contexts/SelectedUserContext";
 
 export const Global = () => {
   const [groups, setGroups] = useState<string[]>([]);
