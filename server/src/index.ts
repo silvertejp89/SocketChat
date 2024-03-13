@@ -28,6 +28,8 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log("A user has connected");
 
+  io.emit("users_updated", users);
+
   socket.on("add_user", (newUser: User) => {
     users.push(newUser);
     console.log(users);

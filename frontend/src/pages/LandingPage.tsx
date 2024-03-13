@@ -9,6 +9,11 @@ export const LandingPage = () => {
 
   useEffect(() => {
     const s = io("http://localhost:3000");
+
+    // s.on("show_users", (users: string[]) => {
+    //   setUsers(users);
+    // });
+
     s.on("users_updated", (users: string[]) => {
       console.log(users);
       setUsers(users);
@@ -23,7 +28,7 @@ export const LandingPage = () => {
 
   return (
     <section>
-      <SignInComponent socket={socket} users={users} key={users} />
+      <SignInComponent socket={socket} users={users} />
     </section>
   );
 };
