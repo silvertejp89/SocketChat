@@ -3,8 +3,9 @@ import cors from "cors";
 import { createServer } from "node:http";
 import { Server } from "socket.io";
 import { User } from "./models/User";
-
+import { Group } from "./models/Group";
 const users: User[] = [];
+const groups: Group[] = [];
 
 const app = express();
 
@@ -24,7 +25,7 @@ const io = new Server(server, {
     origin: "*",
   },
 });
-
+//User
 io.on("connection", (socket) => {
   console.log("A user has connected");
 
@@ -34,6 +35,15 @@ io.on("connection", (socket) => {
     users.push(newUser);
     console.log(users);
     io.emit("users_updated", users);
+  });
+
+  //Group
+  io.emit("groups_updated", groups);
+
+  socket.on("add_group", (newGroup: Group) => {
+    groups.push(newGroup);
+    console.log(groups);
+    io.emit("groups_updated", groups);
   });
 });
 
