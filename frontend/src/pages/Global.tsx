@@ -25,9 +25,7 @@ export const Global = () => {
   return (
     <div className="flex flex-row items-around w-full h-screen py-10 px-16 justify-between">
       <GroupComponent socket={socket} groups={groups} />
-      <div className="w-1/2 min-h-[95%]">
-        {socket && <ChatComponent socket={socket} />}
-      </div>
+      <div className="w-1/2 min-h-[95%]">{socket && <ChatComponent />}</div>
     </div>
   );
 };

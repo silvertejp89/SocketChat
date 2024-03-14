@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { UserList } from "./UserList";
 import { Socket } from "socket.io-client";
 import { User } from "../models/User";
-import { SelectedUserContext } from "../contexts/SelectedUserContext";
+import { ChatContext } from "../contexts/ChatContext";
 import { useNavigate } from "react-router-dom";
 
 interface ISignInProps {
@@ -12,7 +12,7 @@ interface ISignInProps {
 
 export const SignInComponent = ({ socket, users }: ISignInProps) => {
   const navigate = useNavigate();
-  const setSelectedUser = useContext(SelectedUserContext);
+  const setSelectedUser = useContext(ChatContext);
   const [user, setUser] = useState<User>({
     id: 0,
     name: "",

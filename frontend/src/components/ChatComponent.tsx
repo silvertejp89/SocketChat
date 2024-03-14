@@ -1,54 +1,32 @@
 import { useState, useEffect, useContext } from "react";
 import { IMessage } from "../models/IMessage";
 import { MessageComponent } from "./MessageComponent";
-import { SelectedUserContext } from "../contexts/SelectedUserContext";
-import { Socket } from "socket.io-client";
+import { ChatContext } from "../contexts/ChatContext";
+import { Socket, io } from "socket.io-client";
 
-interface Props {
-  socket: Socket;
-}
-
-export const ChatComponent = ({ socket }: Props) => {
-  const selectedUser = useContext(SelectedUserContext);
+export const ChatComponent = () => {
+  const selectedUser = useContext(ChatContext);
+  const socket = useContext(ChatContext);
 
   //Håller reda på vad användaren skriver:
   const [messageInput, setMessageInput] = useState<string>("");
   //Håller reda på messageList:
   const [messageList, setMessageList] = useState<IMessage[]>([]);
 
-  //Hårdkodad messageList
-  // let messageList: IMessage[] = [
-  //   {
-  //     id: 1,
-  //     author: "Kriss",
-  //     date: "2024-03-11",
-  //     message: "Hej hopp",
-  //   },
-  //   {
-  //     id: 2,
-  //     author: "Simon",
-  //     date: "2024-03-11",
-  //     message: "Allt är bäst",
-  //   },
-  //   {
-  //     id: 3,
-  //     author: "Filip",
-  //     date: "2024-03-11",
-  //     message: "...så var det med det",
-  //   },
-  // ];
-
   useEffect(() => {
-    if (!socket) return;
+    const s = io("http://localhost:3000");
 
-    socket.on("receive_message", (message: IMessage) => {
-      setMessageList((prevMessages) => [...prevMessages, message]);
+    s.on("messages_updated", (messages: IMessage[]) => {
+      console.log(messages);
+      setMessageList(messages);
     });
 
+    socket?.setSocket(s);
+
     return () => {
-      socket.off("receive_message");
+      socket?.socket?.disconnect();
     };
-  }, [socket]);
+  }, []);
 
   const sendMessage = (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,7 +39,7 @@ export const ChatComponent = ({ socket }: Props) => {
       message: messageInput.trim(),
     };
     setMessageList((prevMessages) => [...prevMessages, message]);
-    socket.emit("send_message", message);
+    socket?.socket?.emit("add_message", message);
     setMessageInput("");
   };
   //---------------------------------------------------------------------------------------------------------------

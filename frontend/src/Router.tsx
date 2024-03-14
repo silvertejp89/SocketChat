@@ -3,8 +3,9 @@ import { Global } from "./pages/Global";
 import { Group } from "./pages/Group";
 import { PageNotFound } from "./pages/PageNotFound";
 import { LandingPage } from "./pages/LandingPage";
-import { SelectedUserContext } from "./contexts/SelectedUserContext";
+import { ChatContext } from "./contexts/ChatContext";
 import { useState } from "react";
+import { Socket } from "socket.io-client";
 
 export const router = createBrowserRouter([
   {
@@ -30,10 +31,11 @@ export const router = createBrowserRouter([
 
 export const RouterHolder = () => {
   const [name, setName] = useState<string | null>("hej");
+  const [socket, setSocket] = useState<Socket>();
 
   return (
-    <SelectedUserContext.Provider value={{ name, setName }}>
+    <ChatContext.Provider value={{ name, setName, socket, setSocket }}>
       <RouterProvider router={router} />
-    </SelectedUserContext.Provider>
+    </ChatContext.Provider>
   );
 };

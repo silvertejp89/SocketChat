@@ -3,7 +3,7 @@ import ButtonComponent from "./ButtonComponent";
 import { GroupList } from "./GroupList";
 import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { Group } from "../models/Group";
-import { SelectedUserContext } from "../contexts/SelectedUserContext";
+import { ChatContext } from "../contexts/ChatContext";
 
 interface IGroupCreateProps {
   socket: Socket | undefined;
@@ -11,7 +11,7 @@ interface IGroupCreateProps {
 }
 
 export const GroupComponent = ({ socket, groups }: IGroupCreateProps) => {
-  const selectedUser = useContext(SelectedUserContext);
+  const selectedUser = useContext(ChatContext);
   const [group, setGroup] = useState<Group>({
     id: 0,
     name: "",
