@@ -2,19 +2,24 @@ import { Socket } from "socket.io-client";
 import ButtonComponent from "./ButtonComponent";
 import { GroupList } from "./GroupList";
 import { ChangeEvent, FormEvent, useContext, useState } from "react";
-import { Group } from "../models/Group";
 import { ChatContext } from "../contexts/ChatContext";
+import { IGroup } from "../models/IGroup";
+
 
 interface IGroupCreateProps {
   socket: Socket | undefined;
-  groups: string[];
+  groups: IGroup[];
 }
 
 export const GroupComponent = ({ socket, groups }: IGroupCreateProps) => {
+
   const selectedUser = useContext(ChatContext);
-  const [group, setGroup] = useState<Group>({
+  const [group, setGroup] = useState<IGroup>({
+
+
     id: 0,
     name: "",
+    messages: [],
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,9 +29,13 @@ export const GroupComponent = ({ socket, groups }: IGroupCreateProps) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    socket?.emit("add_group", group.name);
+
+    const newGroup: IGroup = {
+      ...group,
+      id: groups.length + 1,
+    };
+    socket?.emit("add_group", newGroup);
   };
-  console.log(group.name);
 
   return (
     <section>
@@ -54,7 +63,7 @@ export const GroupComponent = ({ socket, groups }: IGroupCreateProps) => {
             </button>
           </form>
           {groups.map((group) => (
-            <GroupList group={group} />
+            <GroupList group={group} key={group.id} />
           ))}
         </div>
       </div>

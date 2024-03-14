@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
         element: <Global />,
       },
       {
-        path: "/Group",
+        path: "/Group/:groupName",
         element: <Group />,
       },
     ],

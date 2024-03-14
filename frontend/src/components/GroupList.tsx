@@ -1,18 +1,19 @@
 // import { GroupIcon } from "./GroupIcon";
 import { Link } from "react-router-dom";
+import { IGroup } from "../models/IGroup";
 interface IGroupListProps {
-  group: string;
+  group: IGroup;
 }
 
 export const GroupList = ({ group }: IGroupListProps) => {
   return (
     <Link
       className="grid grid-cols-2 gap-3 my-5 bg-white p-5 rounded overflow-auto"
-      key={group}
-      to={"/" + group}
+      key={group.id}
+      to={"/Group/" + group.id}
     >
       {" "}
-      {group}
+      {group.name}
       {/* {groups.map((group) => (
         <GroupIcon group={group} key={group.id} />
       ))} */}
