@@ -7,7 +7,7 @@ import { SelectedUserContext } from "../contexts/SelectedUserContext";
 
 interface IGroupCreateProps {
   socket: Socket | undefined;
-  groups: string[];
+  groups: IGroup[];
 }
 
 export const GroupComponent = ({ socket, groups }: IGroupCreateProps) => {
@@ -25,7 +25,12 @@ export const GroupComponent = ({ socket, groups }: IGroupCreateProps) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    socket?.emit("add_group", group.name);
+
+    const newGroup: IGroup = {
+      ...group,
+      id: groups.length + 1,
+    };
+    socket?.emit("add_group", newGroup);
   };
 
   return (
@@ -54,7 +59,7 @@ export const GroupComponent = ({ socket, groups }: IGroupCreateProps) => {
             </button>
           </form>
           {groups.map((group) => (
-            <GroupList group={group} />
+            <GroupList group={group} key={group.id} />
           ))}
         </div>
       </div>

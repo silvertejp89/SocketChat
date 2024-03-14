@@ -29,6 +29,7 @@ export const SignInComponent = ({ socket, users }: ISignInProps) => {
     socket?.emit("add_user", user.name);
     navigate("/Global");
   };
+
   setSelectedUser?.setName(user.name);
   return (
     <section className="flex h-screen justify-center flex-col items-center ">
