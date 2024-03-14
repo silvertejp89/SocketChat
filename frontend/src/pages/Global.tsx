@@ -3,9 +3,10 @@ import { ChatComponent } from "../components/ChatComponent";
 import { Socket, io } from "socket.io-client";
 import { GroupComponent } from "../components/GroupComponent";
 import axios from "axios";
+import { IGroup } from "../models/IGroup";
 
 export const Global = () => {
-  const [groups, setGroups] = useState<string[]>([]);
+  const [groups, setGroups] = useState<IGroup[]>([]);
   const [socket, setSocket] = useState<Socket>();
 
   const testFetch = async () => {
@@ -19,7 +20,7 @@ export const Global = () => {
 
     testFetch();
 
-    s.on("groups_updated", (groups: string[]) => {
+    s.on("groups_updated", (groups: IGroup[]) => {
       console.log(groups);
       setGroups(groups);
     });
