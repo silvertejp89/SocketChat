@@ -50,7 +50,8 @@ export const ChatComponent = ({ socket }: Props) => {
     };
   }, [socket]);
 
-  const sendMessage = () => {
+  const sendMessage = (e: React.FormEvent) => {
+    e.preventDefault();
     //om meddelande fält är tomt, return, annars skapa meddelande.
     if (!messageInput.trim()) return;
     const message: IMessage = {
@@ -73,22 +74,23 @@ export const ChatComponent = ({ socket }: Props) => {
         ))}
       </div>
 
-      <div className="flex gap-6 ">
-        <input
-          type="text"
-          placeholder="hello..."
-          className="w-5/6 rounded py-2 px-4 border border-slate-300"
-          //the magic:
-          value={messageInput}
-          onChange={(e) => setMessageInput(e.target.value)}
-        />
-        <div
-          className="w-1/6 bg-white rounded flex justify-center items-center cursor-pointer border border-slate-300 text-slate-500"
-          onClick={sendMessage}
-        >
-          ➤
+      <form onSubmit={sendMessage}>
+        <div className="flex gap-6">
+          <input
+            type="text"
+            placeholder="Type your message..."
+            value={messageInput}
+            onChange={(e) => setMessageInput(e.target.value)}
+            className="w-5/6 rounded py-2 px-4 border border-slate-300"
+          />
+          <button
+            type="submit"
+            className="w-1/6 bg-white rounded flex justify-center items-center cursor-pointer border border-slate-300 text-slate-500"
+          >
+            ➤
+          </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 };
