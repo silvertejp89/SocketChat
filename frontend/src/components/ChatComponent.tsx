@@ -5,7 +5,7 @@ import { SelectedUserContext } from "../contexts/SelectedUserContext";
 import { Socket } from "socket.io-client";
 
 interface Props {
-  socket: SocketIOClient.Socket;
+  socket: Socket;
 }
 
 export const ChatComponent = ({ socket }: Props) => {
