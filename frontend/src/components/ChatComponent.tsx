@@ -5,8 +5,13 @@ import { MyMessageComponent } from "./MyMessageComponent";
 import { ChatContext } from "../contexts/ChatContext";
 import { io } from "socket.io-client";
 import { format } from "date-fns";
+import { IGroup } from "../models/IGroup";
 
-export const ChatComponent = () => {
+interface IChatComponentProps {
+  group: IGroup;
+}
+
+export const ChatComponent: React.FC<IChatComponentProps> = ({ group }) => {
   const selectedUser = useContext(ChatContext);
   const socket = useContext(ChatContext);
 
@@ -20,7 +25,10 @@ export const ChatComponent = () => {
 
     s.on("messages_updated", (messages: IMessage[]) => {
       console.log(messages);
-      setMessageList(messages);
+      setMessageList(
+        //koppla message.groupId till det id som gruppen har
+        messages.filter((message) => message.groupId === group.id)
+      );
     });
 
     socket?.setSocket(s);
@@ -28,7 +36,7 @@ export const ChatComponent = () => {
     return () => {
       socket?.socket?.disconnect();
     };
-  }, []);
+  }, [group.id]);
 
   const sendMessage = (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,6 +50,7 @@ export const ChatComponent = () => {
       author: selectedUser?.name || "Anonymous",
       date: formattedDate,
       message: messageInput.trim(),
+      groupId: group.id,
     };
     setMessageList((prevMessages) => [...prevMessages, message]);
     socket?.socket?.emit("add_message", message);

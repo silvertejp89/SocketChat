@@ -3,4 +3,5 @@ export interface IMessage {
   author: string;
   date: string;
   message: string;
+  groupId: number;
 }

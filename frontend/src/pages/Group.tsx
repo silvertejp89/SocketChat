@@ -7,6 +7,7 @@ import { IGroup } from "../models/IGroup";
 export const Group = () => {
   const { groupName } = useParams();
   const [group, setGroup] = useState<IGroup>();
+
   const testFetch = async () => {
     const res = await axios.get("http://localhost:3000/groups/" + groupName);
 
@@ -27,7 +28,7 @@ export const Group = () => {
         <div className="w-2/4 text-xl">{group?.name} 's Room</div>
       </div>
       <div className="w-full h-[95%]  ">
-        <ChatComponent />
+        {group && <ChatComponent group={group} />}
       </div>
     </section>
   );
