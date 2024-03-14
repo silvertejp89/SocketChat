@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { IMessage } from "../models/IMessage";
 import { MessageComponent } from "./MessageComponent";
+import { MyMessageComponent } from "./MyMessageComponent";
 import { ChatContext } from "../contexts/ChatContext";
 import { io } from "socket.io-client";
 import { format } from "date-fns";
@@ -49,11 +50,18 @@ export const ChatComponent = () => {
   //---------------------------------------------------------------------------------------------------------------
   return (
     <div className="flex-col h-full">
-      <div className=" text-2xl  ">Start chatting {selectedUser?.name}!</div>
-      <div className="bg-white w-full  h-[90%] mb-6 rounded flex flex-col gap-3 p-4 border border-slate-300">
-        {messageList.map((message) => (
-          <MessageComponent message={message} key={message.id} />
-        ))}
+      <div className="text-2xl">Start chatting {selectedUser?.name}!</div>
+      <div className="bg-white w-full h-[90%] mb-6 rounded flex flex-col gap-3 p-4 border border-slate-300">
+        {messageList.map((message) => {
+          // Kontrollera om meddelandets författare är samma som den aktuella användaren
+          if (message.author === selectedUser?.name) {
+            // Om så är fallet, rendera MyMessageComponent
+            return <MyMessageComponent message={message} key={message.id} />;
+          } else {
+            // Annars rendera MessageComponent
+            return <MessageComponent message={message} key={message.id} />;
+          }
+        })}
       </div>
 
       <form onSubmit={sendMessage}>
