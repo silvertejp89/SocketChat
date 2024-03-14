@@ -3,9 +3,9 @@ import cors from "cors";
 import { createServer } from "node:http";
 import { Server } from "socket.io";
 import { User } from "./models/User";
-import { Group } from "./models/Group";
+import { IGroup } from "./models/IGroup";
 const users: User[] = [];
-const groups: Group[] = [];
+const groups: IGroup[] = [];
 
 const app = express();
 
@@ -17,6 +17,10 @@ app.use(
 
 app.get("/", (req, res) => {
   res.send("Hello world");
+});
+
+app.get("/groups", (req, res) => {
+  res.send(groups);
 });
 
 const server = createServer(app);
@@ -40,7 +44,7 @@ io.on("connection", (socket) => {
   //Group
   io.emit("groups_updated", groups);
 
-  socket.on("add_group", (newGroup: Group) => {
+  socket.on("add_group", (newGroup: IGroup) => {
     groups.push(newGroup);
     console.log(groups);
     io.emit("groups_updated", groups);
