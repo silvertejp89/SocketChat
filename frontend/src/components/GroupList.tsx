@@ -9,7 +9,7 @@ export const GroupList = ({ group }: IGroupListProps) => {
     <Link
       className="grid grid-cols-2 gap-3 my-5 bg-white p-5 rounded overflow-auto"
       key={group}
-      to={"/" + group}
+      to={"/Group/" + group}
     >
       {" "}
       {group}

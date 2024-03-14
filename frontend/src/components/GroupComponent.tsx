@@ -2,7 +2,7 @@ import { Socket } from "socket.io-client";
 import ButtonComponent from "./ButtonComponent";
 import { GroupList } from "./GroupList";
 import { ChangeEvent, FormEvent, useContext, useState } from "react";
-import { Group } from "../models/Group";
+import { IGroup } from "../models/IGroup";
 import { SelectedUserContext } from "../contexts/SelectedUserContext";
 
 interface IGroupCreateProps {
@@ -12,9 +12,10 @@ interface IGroupCreateProps {
 
 export const GroupComponent = ({ socket, groups }: IGroupCreateProps) => {
   const selectedUser = useContext(SelectedUserContext);
-  const [group, setGroup] = useState<Group>({
+  const [group, setGroup] = useState<IGroup>({
     id: 0,
     name: "",
+    messages: [],
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +27,6 @@ export const GroupComponent = ({ socket, groups }: IGroupCreateProps) => {
     e.preventDefault();
     socket?.emit("add_group", group.name);
   };
-  console.log(group.name);
 
   return (
     <section>

@@ -2,13 +2,22 @@ import { useEffect, useState } from "react";
 import { ChatComponent } from "../components/ChatComponent";
 import { Socket, io } from "socket.io-client";
 import { GroupComponent } from "../components/GroupComponent";
+import axios from "axios";
 
 export const Global = () => {
   const [groups, setGroups] = useState<string[]>([]);
   const [socket, setSocket] = useState<Socket>();
 
+  const testFetch = async () => {
+    const res = await axios.get("http://localhost:3000/groups");
+
+    console.log(res.data);
+  };
+
   useEffect(() => {
     const s = io("http://localhost:3000");
+
+    testFetch();
 
     s.on("groups_updated", (groups: string[]) => {
       console.log(groups);
