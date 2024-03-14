@@ -5,18 +5,14 @@ import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { ChatContext } from "../contexts/ChatContext";
 import { IGroup } from "../models/IGroup";
 
-
 interface IGroupCreateProps {
   socket: Socket | undefined;
   groups: IGroup[];
 }
 
 export const GroupComponent = ({ socket, groups }: IGroupCreateProps) => {
-
   const selectedUser = useContext(ChatContext);
   const [group, setGroup] = useState<IGroup>({
-
-
     id: 0,
     name: "",
     messages: [],
@@ -48,7 +44,7 @@ export const GroupComponent = ({ socket, groups }: IGroupCreateProps) => {
         <div className="w-full h-[50%] ">
           <form
             onSubmit={handleSubmit}
-            className=" flex w-full h-12 justify-around gap-3 sticky top-0 bg-[#F1F5F9] shadow-[0_0_6px_3px_rgba(0,0,0,0.1)]"
+            className=" flex w-full h-12 justify-around gap-3 sticky top-0 bg-[#F1F5F9]"
           >
             <input
               name="name"
