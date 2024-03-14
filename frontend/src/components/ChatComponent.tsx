@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { IMessage } from "../models/IMessage";
 import { MessageComponent } from "./MessageComponent";
 import { ChatContext } from "../contexts/ChatContext";
-import { Socket, io } from "socket.io-client";
+import { io } from "socket.io-client";
 
 export const ChatComponent = () => {
   const selectedUser = useContext(ChatContext);
