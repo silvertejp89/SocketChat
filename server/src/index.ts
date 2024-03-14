@@ -4,8 +4,10 @@ import { createServer } from "node:http";
 import { Server } from "socket.io";
 import { User } from "./models/User";
 import { IGroup } from "./models/IGroup";
+import { IMessage } from "./models/IMessage";
 const users: User[] = [];
 const groups: IGroup[] = [];
+const messages: IMessage[] = [];
 
 const app = express();
 
@@ -57,6 +59,15 @@ io.on("connection", (socket) => {
     groups.push(newGroup);
     console.log(groups);
     io.emit("groups_updated", groups);
+  });
+
+  // Messages
+  io.emit("messages_updated", messages);
+
+  socket.on("add_message", (newMessage: IMessage) => {
+    messages.push(newMessage);
+    console.log(messages);
+    io.emit("messages_updated", messages);
   });
 });
 

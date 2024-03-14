@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { SelectedUserContext } from "../contexts/SelectedUserContext";
+import { ChatContext } from "../contexts/ChatContext";
 import { useNavigate } from "react-router-dom";
 
 interface IUserListProps {
@@ -7,7 +7,7 @@ interface IUserListProps {
 }
 
 export const UserList = ({ user }: IUserListProps) => {
-  const selectedUser = useContext(SelectedUserContext);
+  const selectedUser = useContext(ChatContext);
   const navigate = useNavigate();
 
   const selectUser = () => {

@@ -2,8 +2,9 @@ import { Socket } from "socket.io-client";
 import ButtonComponent from "./ButtonComponent";
 import { GroupList } from "./GroupList";
 import { ChangeEvent, FormEvent, useContext, useState } from "react";
+import { ChatContext } from "../contexts/ChatContext";
 import { IGroup } from "../models/IGroup";
-import { SelectedUserContext } from "../contexts/SelectedUserContext";
+
 
 interface IGroupCreateProps {
   socket: Socket | undefined;
@@ -11,8 +12,11 @@ interface IGroupCreateProps {
 }
 
 export const GroupComponent = ({ socket, groups }: IGroupCreateProps) => {
-  const selectedUser = useContext(SelectedUserContext);
+
+  const selectedUser = useContext(ChatContext);
   const [group, setGroup] = useState<IGroup>({
+
+
     id: 0,
     name: "",
     messages: [],
