@@ -3,6 +3,7 @@ import { IMessage } from "../models/IMessage";
 import { MessageComponent } from "./MessageComponent";
 import { ChatContext } from "../contexts/ChatContext";
 import { io } from "socket.io-client";
+import { format } from "date-fns";
 
 export const ChatComponent = () => {
   const selectedUser = useContext(ChatContext);
@@ -32,10 +33,13 @@ export const ChatComponent = () => {
     e.preventDefault();
     //om meddelande fält är tomt, return, annars skapa meddelande.
     if (!messageInput.trim()) return;
+
+    const formattedDate = format(new Date(), "yyyy-MM-dd HH:mm:ss");
+
     const message: IMessage = {
       id: messageList.length + 1,
       author: selectedUser?.name || "Anonymous",
-      date: new Date().toISOString(),
+      date: formattedDate,
       message: messageInput.trim(),
     };
     setMessageList((prevMessages) => [...prevMessages, message]);
