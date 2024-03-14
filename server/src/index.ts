@@ -23,6 +23,15 @@ app.get("/groups", (req, res) => {
   res.send(groups);
 });
 
+app.get("/groups/:groupId", (req, res) => {
+  const groupId = parseInt(req.params.groupId);
+  const group = groups.find((group) => group.id === groupId);
+  if (!group) {
+    return res.status(404).send("Group not found");
+  }
+  res.send(group);
+});
+
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
