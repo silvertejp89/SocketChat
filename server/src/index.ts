@@ -69,6 +69,21 @@ io.on("connection", (socket) => {
     console.log(messages);
     io.emit("messages_updated", messages);
   });
+
+  socket.on(
+    "edit_message",
+    (editedMessage: { id: number; newMessage: string }) => {
+      const { id, newMessage } = editedMessage;
+      const messageIndex = messages.findIndex((msg) => msg.id === id);
+      if (messageIndex !== -1) {
+        messages[messageIndex].message = newMessage;
+        console.log(messages);
+        io.emit("messages_updated", messages);
+      } else {
+        console.log("Message not found");
+      }
+    }
+  );
 });
 
 server.listen(3000, () => {

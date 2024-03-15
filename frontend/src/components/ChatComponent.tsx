@@ -65,7 +65,14 @@ export const ChatComponent = ({ group }: IChatComponentProps) => {
           // Kontrollera om meddelandets författare är samma som den aktuella användaren
           if (message.author === selectedUser?.name) {
             // Om så är fallet, rendera MyMessageComponent
-            return <MyMessageComponent message={message} key={message.id} />;
+            return (
+              <MyMessageComponent
+                message={message}
+                key={message.id}
+                messageList={messageList}
+                setMessageList={setMessageList}
+              />
+            );
           } else {
             // Annars rendera MessageComponent
             return <MessageComponent message={message} key={message.id} />;
