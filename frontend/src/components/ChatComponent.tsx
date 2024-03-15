@@ -11,7 +11,7 @@ interface IChatComponentProps {
   group: IGroup;
 }
 
-export const ChatComponent: React.FC<IChatComponentProps> = ({ group }) => {
+export const ChatComponent = ({ group }: IChatComponentProps) => {
   const selectedUser = useContext(ChatContext);
   const socket = useContext(ChatContext);
 
