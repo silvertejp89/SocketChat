@@ -12,7 +12,6 @@ export const Group = () => {
     const res = await axios.get("http://localhost:3000/groups/" + groupName);
 
     setGroup(res.data);
-    console.log(res.data);
   };
 
   useEffect(() => {

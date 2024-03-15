@@ -20,7 +20,6 @@ export const GroupComponent = ({ socket, groups }: IGroupCreateProps) => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setGroup({ ...group, [e.target.name]: e.target.value });
-    console.log(e.target.value);
   };
 
   const handleSubmit = (e: FormEvent) => {

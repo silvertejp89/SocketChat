@@ -42,13 +42,10 @@ const io = new Server(server, {
 });
 //User
 io.on("connection", (socket) => {
-  console.log("A user has connected");
-
   io.emit("users_updated", users);
 
   socket.on("add_user", (newUser: User) => {
     users.push(newUser);
-    console.log(users);
     io.emit("users_updated", users);
   });
 
@@ -57,7 +54,7 @@ io.on("connection", (socket) => {
 
   socket.on("add_group", (newGroup: IGroup) => {
     groups.push(newGroup);
-    console.log(groups);
+
     io.emit("groups_updated", groups);
   });
 
@@ -66,7 +63,7 @@ io.on("connection", (socket) => {
 
   socket.on("add_message", (newMessage: IMessage) => {
     messages.push(newMessage);
-    console.log(messages);
+
     io.emit("messages_updated", messages);
   });
 
@@ -77,7 +74,6 @@ io.on("connection", (socket) => {
       const messageIndex = messages.findIndex((msg) => msg.id === id);
       if (messageIndex !== -1) {
         messages[messageIndex].message = newMessage;
-        console.log(messages);
         io.emit("messages_updated", messages);
       } else {
         console.log("Message not found");

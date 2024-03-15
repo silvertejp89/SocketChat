@@ -21,7 +21,7 @@ export const SignInComponent = ({ socket, users }: ISignInProps) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const maxCharacters = e.target.value.slice(0, 14);
     setUser({ ...user, [e.target.name]: maxCharacters });
-    console.log(maxCharacters);
+
     setSelectedUser?.setName(maxCharacters);
   };
 
@@ -40,7 +40,6 @@ export const SignInComponent = ({ socket, users }: ISignInProps) => {
     navigate("/Global");
   };
 
-  setSelectedUser?.setName(user.name);
   return (
     <section className="flex h-screen justify-center flex-col items-center ">
       <div className="text-2xl">Hello, what is your name?</div>
@@ -61,7 +60,7 @@ export const SignInComponent = ({ socket, users }: ISignInProps) => {
       </form>
       <ul className="flex flex-row flex-wrap max-w-[80%] gap-5 mt-5 bg-white p-5 rounded">
         {users.map((user) => (
-          <UserList user={user} />
+          <UserList user={user} key={user} />
         ))}
       </ul>
     </section>

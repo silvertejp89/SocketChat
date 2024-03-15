@@ -11,8 +11,6 @@ export const Global = () => {
 
   const testFetch = async () => {
     const res = await axios.get("http://localhost:3000/groups");
-
-    console.log(res.data);
   };
 
   useEffect(() => {
@@ -21,7 +19,6 @@ export const Global = () => {
     testFetch();
 
     s.on("groups_updated", (groups: IGroup[]) => {
-      console.log(groups);
       setGroups(groups);
     });
 

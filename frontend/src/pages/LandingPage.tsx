@@ -10,7 +10,6 @@ export const LandingPage = () => {
     const s = io("http://localhost:3000");
 
     s.on("users_updated", (users: string[]) => {
-      console.log(users);
       setUsers(users);
     });
 

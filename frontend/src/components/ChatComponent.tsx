@@ -24,7 +24,6 @@ export const ChatComponent = ({ group }: IChatComponentProps) => {
     const s = io("http://localhost:3000");
 
     s.on("messages_updated", (messages: IMessage[]) => {
-      console.log(messages);
       setMessageList(
         //koppla message.groupId till det id som gruppen har
         messages.filter((message) => message.groupId === group.id)
