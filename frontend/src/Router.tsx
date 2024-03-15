@@ -4,7 +4,7 @@ import { Group } from "./pages/Group";
 import { PageNotFound } from "./pages/PageNotFound";
 import { LandingPage } from "./pages/LandingPage";
 import { ChatContext } from "./contexts/ChatContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 
 export const router = createBrowserRouter([
@@ -30,8 +30,13 @@ export const router = createBrowserRouter([
 ]);
 
 export const RouterHolder = () => {
-  const [name, setName] = useState<string | null>("Albert");
+  const storedName = localStorage.getItem("chatUserName");
+  const [name, setName] = useState<string | null>(storedName || "Albert");
   const [socket, setSocket] = useState<Socket>();
+
+  useEffect(() => {
+    localStorage.setItem("chatUserName", name || "");
+  }, [name]);
 
   return (
     <ChatContext.Provider value={{ name, setName, socket, setSocket }}>

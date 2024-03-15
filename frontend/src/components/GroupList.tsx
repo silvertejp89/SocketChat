@@ -12,11 +12,7 @@ export const GroupList = ({ group }: IGroupListProps) => {
       key={group.id}
       to={"/Group/" + group.id}
     >
-      {" "}
       {group.name}
-      {/* {groups.map((group) => (
-        <GroupIcon group={group} key={group.id} />
-      ))} */}
     </Link>
   );
 };

@@ -25,7 +25,7 @@ export const Group = () => {
         <button className="bg-white w-1/4 h-10 rounded border border-slate-300">
           <Link to="/global">Go back</Link>
         </button>
-        <div className="w-2/4 text-xl">{group?.name} 's Room</div>
+        <div className="w-2/4 text-xl">{group?.name}'s Room</div>
       </div>
       <div className="w-full h-[95%]  ">
         {group && <ChatComponent group={group} />}

@@ -19,13 +19,23 @@ export const SignInComponent = ({ socket, users }: ISignInProps) => {
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-    console.log(e.target.value);
-    setSelectedUser?.setName(user.name);
+    const maxCharacters = e.target.value.slice(0, 14);
+    setUser({ ...user, [e.target.name]: maxCharacters });
+    console.log(maxCharacters);
+    setSelectedUser?.setName(maxCharacters);
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+
+    if (users.includes(user.name)) {
+      alert("This name is already taken. Please choose another one.");
+      return;
+    }
+    if (!user.name.trim()) {
+      alert("Please enter a valid name.");
+      return;
+    }
     socket?.emit("add_user", user.name);
     navigate("/Global");
   };
