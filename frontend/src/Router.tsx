@@ -30,7 +30,7 @@ export const router = createBrowserRouter([
 ]);
 
 export const RouterHolder = () => {
-  const [name, setName] = useState<string | null>("hej");
+  const [name, setName] = useState<string | null>("Albert");
   const [socket, setSocket] = useState<Socket>();
 
   return (

@@ -49,7 +49,7 @@ export const SignInComponent = ({ socket, users }: ISignInProps) => {
           Join
         </button>
       </form>
-      <ul className="flex flex-row gap-5 mt-5 bg-white p-5 rounded">
+      <ul className="flex flex-row flex-wrap max-w-[80%] gap-5 mt-5 bg-white p-5 rounded">
         {users.map((user) => (
           <UserList user={user} />
         ))}

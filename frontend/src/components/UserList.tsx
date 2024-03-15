@@ -19,7 +19,7 @@ export const UserList = ({ user }: IUserListProps) => {
     <li
       onClick={selectUser}
       key={user}
-      className="bg-blue-200 rounded p-1 cursor-pointer flex items-center justify-center h-10 w-14"
+      className="bg-blue-200 rounded p-1 cursor-pointer flex items-center justify-center h-10 min-w-14"
     >
       {user}
     </li>
